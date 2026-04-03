@@ -143,3 +143,46 @@ results/<dataset>_predictions.jsonl
 ```
 
 Override this with `--output-jsonl` if needed.
+
+---
+
+## Method Overview
+
+<p align="center">
+  <img src="img/scicon_github.PNG" alt="SciCon overview" width="760">
+</p>
+
+SciCon is a simple contrastive decoding method for scientific figure multiple-choice QA.
+
+- The model first scores each answer candidate with the full multimodal input.
+- It then scores the same candidates again using a text-only version of the question.
+- SciCon subtracts the text-only prior, scaled by `alpha`, from the multimodal score.
+- This suppresses answers that are mainly favored by textual bias and promotes answers grounded in the figure.
+
+In short, SciCon turns answer choices into an explicit prior and removes that prior during decoding so that the final prediction relies more on visual evidence.
+
+---
+
+## Citation
+
+If you use this repository in your research, please cite:
+
+```bibtex
+@article{roh2026choices,
+  title={When Choices Become Priors: Contrastive Decoding for Scientific Figure Multiple-Choice QA},
+  author={Roh, Taeyun and Jo, Eun-yeong and Jang, Wonjune and Kang, Jaewoo},
+  journal={arXiv preprint arXiv:2603.28026},
+  year={2026}
+}
+```
+
+---
+
+## Paper
+
+<p align="center">
+  <strong>When Choices Become Priors: Contrastive Decoding for Scientific Figure Multiple-Choice QA</strong><br>
+  Taeyun Roh, Eun-yeong Jo, Wonjune Jang, Jaewoo Kang
+</p>
+
+This repository contains the evaluation code accompanying the paper and is intended as a lightweight research release for scientific figure multiple-choice QA.
