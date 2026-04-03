@@ -1,12 +1,22 @@
 # Scicon
 
 Code for scientific figure multiple-choice QA with contrastive decoding.
+## Method Overview
 
-This repository currently provides a lightweight evaluation release built around:
+<p align="center">
+  <img src="img/scicon_github.PNG" alt="SciCon overview" width="760">
+</p>
 
-- `src/run_always_contrastive_all_candidate.py`
+SciCon is a simple contrastive decoding method for scientific figure multiple-choice QA.
 
-The script runs multiple-choice prediction on scientific figure QA benchmarks through an OpenAI-compatible vision-language model endpoint such as `sglang` or `vLLM`.
+- The model first scores each answer candidate with the full multimodal input.
+- It then scores the same candidates again using a text-only version of the question.
+- SciCon subtracts the text-only prior, scaled by `alpha`, from the multimodal score.
+- This suppresses answers that are mainly favored by textual bias and promotes answers grounded in the figure.
+
+In short, SciCon turns answer choices into an explicit prior and removes that prior during decoding so that the final prediction relies more on visual evidence.
+
+---
 
 ## What Is Included
 
@@ -146,22 +156,7 @@ Override this with `--output-jsonl` if needed.
 
 ---
 
-## Method Overview
 
-<p align="center">
-  <img src="img/scicon_github.PNG" alt="SciCon overview" width="760">
-</p>
-
-SciCon is a simple contrastive decoding method for scientific figure multiple-choice QA.
-
-- The model first scores each answer candidate with the full multimodal input.
-- It then scores the same candidates again using a text-only version of the question.
-- SciCon subtracts the text-only prior, scaled by `alpha`, from the multimodal score.
-- This suppresses answers that are mainly favored by textual bias and promotes answers grounded in the figure.
-
-In short, SciCon turns answer choices into an explicit prior and removes that prior during decoding so that the final prediction relies more on visual evidence.
-
----
 
 ## Citation
 
